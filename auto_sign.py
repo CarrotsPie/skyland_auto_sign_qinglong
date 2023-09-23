@@ -17,7 +17,6 @@ import time
 from urllib import parse
 
 import requests
-import notify
 
 skyland_tokens = sys.argv[1]
 skyland_notify = ''
