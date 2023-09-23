@@ -19,8 +19,8 @@ from urllib import parse
 import requests
 import notify
 
-skyland_tokens = os.getenv('SKYLAND_TOKEN') or ''
-skyland_notify = os.getenv('SKYLAND_NOTIFY') or ''
+skyland_tokens = sys.argv[1]
+skyland_notify = ''
 
 # 消息内容
 run_message: str = ''
