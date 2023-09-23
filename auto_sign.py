@@ -15,7 +15,7 @@ import logging
 import os
 import time
 from urllib import parse
-
+import sys
 import requests
 
 skyland_tokens = sys.argv[1]
