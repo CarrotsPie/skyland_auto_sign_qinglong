@@ -21,5 +21,6 @@ jobs:
     - name: Run Checkin
       env:
         SKYLAND_TOKEN: ${{ secrets.SKYLAND_TOKEN }}
+        DINGTALK_TOKEN: ${{ secrets.DINGTALK_TOKEN }}
       run: |
         python auto_sign.py ${SKYLAND_TOKEN}
