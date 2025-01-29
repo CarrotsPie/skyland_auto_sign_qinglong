@@ -18,7 +18,8 @@ from urllib import parse
 import sys
 import requests
 
-skyland_tokens = sys.argv[1]
+skyland_tokens = os.environ.get('SKYLAND_TOKEN')
+dingtalk_token = os.environ.get('DINGTALK_TOKEN')
 skyland_notify = ''
 
 # 消息内容
@@ -240,7 +241,23 @@ def start(token):
         run_message += f'签到失败: {ex}'
         logging.error('签到完全失败了！: ', exc_info=ex)
 
-
+def send_message_to_dingtalk(token, text):
+    if (token == ""):
+        return
+    webhook = f'https://oapi.dingtalk.com/robot/send?access_token={token}'
+    header = {
+        "Content-Type": "application/json",
+        "Charset": "UTF-8"
+    }
+    message = {
+        "msgtype": "text",
+        "text": {
+            "content": text
+        }
+    }
+    message_json = json.dumps(message)
+    requests.post(url=webhook, data=message_json, headers=header)
+    
 def main():
     global run_message
     token_list = skyland_tokens.split(';')
@@ -254,7 +271,7 @@ def main():
         print('没有设置token，请在环境变量里添加至少一个token')
         run_message = '没有设置token，请在环境变量里添加至少一个token'
     # 发送消息
-
+    send_message_to_dingtalk(dingtalk_token,run_message)
 
 if __name__ == "__main__":
     main()
